@@ -20,6 +20,7 @@ const AdvicePage = () => {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [advice, setAdvice] = useState("");
   const { user } = useAuth();
   const router = useRouter();
 
@@ -64,6 +65,31 @@ const AdvicePage = () => {
     }
   };
 
+  const fetchAdvice = async (characterClass) => {
+    if (!characterClass) return;
+
+    try {
+      const response = await fetch(
+        `https://api.open5e.com/classes/?name=${encodeURIComponent(characterClass)}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch advice from Open5e API.");
+      }
+      const data = await response.json();
+      const adviceData = data.results?.[0]?.desc || "No specific advice available.";
+      setAdvice(adviceData);
+    } catch (err) {
+      console.error("Error fetching advice:", err);
+      setAdvice("Failed to fetch advice. Please try again later.");
+    }
+  };
+
+  useEffect(() => {
+    if (selectedCharacter) {
+      fetchAdvice(selectedCharacter.characterClass);
+    }
+  }, [selectedCharacter]);
+
   if (loading) return <p>Loading Characters...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
 
@@ -89,6 +115,12 @@ const AdvicePage = () => {
             <p>No characters found.</p>
           )}
         </div>
+        {selectedCharacter && (
+          <div>
+            <h2>Advice for {selectedCharacter.name}</h2>
+            <p>{advice}</p>
+          </div>
+        )}
         <ScenarioAdvice character={selectedCharacter} />
       </div>
     </ProtectedRoute>

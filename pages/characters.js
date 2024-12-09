@@ -101,7 +101,7 @@ const Characters = () => {
               <div>
                 <label>Class:</label>
                 <select
-                  name="class"
+                  name="characterClass"
                   value={formData.characterClass || editingCharacter.characterClass}
                   onChange={handleInputChange}
                 >
