@@ -1,19 +1,26 @@
+import "../styles/globals.css";
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { useRouter } from "next/router";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      router.push(".../home");
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      
+      await updateProfile(userCredential.user, {
+        displayName: name,
+      });
+      
+      router.push("../home");
     } catch (err) {
       setError(err.message);
     }
@@ -31,6 +38,14 @@ const Register = () => {
           onChange={(e) => setEmail(e.target.value)}
           className="border p-2 w-full"
           required
+        />
+        <input 
+        type="text"
+        placeholder="Enter your name here"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="border p-2 w-full"
+        required
         />
         <input
           type="password"

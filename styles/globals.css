@@ -1,0 +1,63 @@
+/* globals.css */
+body {
+  background-color: #1a1a1a; /* Dark background */
+  color: #e53935; /* Red text color */
+  font-family: "Georgia", serif; /* A medieval-style font for D&D vibe */
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Georgia", serif;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); /* Add subtle shadow for D&D effect */
+  color: #e53935; /* Red color */
+  border-bottom: 3px solid #333; /* Black outlining */
+  padding-bottom: 10px;
+}
+
+button {
+  background-color: #1a1a1a; /* Dark background */
+  color: #e53935; /* Red text */
+  border: 2px solid #333; /* Black outline */
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #333; /* Darker background on hover */
+}
+
+input,
+select {
+  background-color: #333;
+  color: #e53935; /* Red text for input fields */
+  border: 2px solid #333; /* Black outline */
+  padding: 8px;
+  font-size: 16px;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #e53935; /* Highlight border with red */
+}
+
+a {
+  color: #e53935; /* Red link color */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline; /* Add underline effect on hover */
+}
+
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}

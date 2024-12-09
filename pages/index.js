@@ -1,4 +1,5 @@
 // pages/index.js
+import "../styles/globals.css";
 import { useRouter } from 'next/router';
 
 const LandingPage = () => {
